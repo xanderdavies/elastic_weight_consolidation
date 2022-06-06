@@ -9,7 +9,7 @@ class Permutator:
         for _ in range(1, num_tasks):
             perm = np.identity(im_size)
             np.random.shuffle(perm)
-        self.perms.append(perm)
+            self.perms.append(perm)
 
     def permute_image(self, img, task_id):
         perm_img = np.matmul(self.perms[task_id], np.ravel(img.numpy()))

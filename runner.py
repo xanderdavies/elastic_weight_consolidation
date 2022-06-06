@@ -1,5 +1,4 @@
 import argparse
-from sympy import LM
 from torch.cuda import is_available
 from utils import Permutator
 from ewc import EWC
@@ -57,9 +56,9 @@ test_loader = DataLoader(test_ds, batch_size=BATCH_SIZE, shuffle=False)
 net = Net().to(DEVICE)
 optimizer = Adam(net.parameters(), lr=LR)
 criterion = nn.CrossEntropyLoss()
-ewc = EWC(net, train_loader, DEVICE, NUM_TASKS, criterion)
 
 permutator = Permutator(NUM_TASKS)
+ewc = EWC(net, train_loader, DEVICE, NUM_TASKS, criterion, permutator)
 
 
 def calc_accuracies(net, task_id):

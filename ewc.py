@@ -1,4 +1,3 @@
-from utils import permute_batch
 from copy import deepcopy
 import torch
 from torch.utils.data import DataLoader
@@ -7,8 +6,8 @@ import torch.nn as nn
 
 class EWC:
     def __init__(
-        self, net: nn.Module, dataloader: DataLoader, device, num_tasks, criterion
-    ):
+        self, net: nn.Module, dataloader: DataLoader, device, num_tasks, criterion, permutator):
+        self.permutator = permutator
         self.net = net
         self.dataloader = dataloader
         self.best_params = [None for _ in range(num_tasks)]
@@ -26,7 +25,7 @@ class EWC:
     def update_fisher(self, task_id):
         for batch in self.dataloader:
             self.net.zero_grad()
-            X, y = permute_batch(batch, task_id)
+            X, y = self.permutator.permute_batch(batch, task_id)
             X, y = X.to(self.device), y.to(self.device)
             logits = self.net(X)
             loss = self.criterion(logits, y)
