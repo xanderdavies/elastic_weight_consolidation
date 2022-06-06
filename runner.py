@@ -55,9 +55,10 @@ test_loader = DataLoader(test_ds, batch_size=BATCH_SIZE, shuffle=False)
 
 # instantiate model
 net = Net().to(DEVICE)
-ewc = EWC(net, train_loader)
 optimizer = Adam(net.parameters(), lr=LR)
 criterion = nn.CrossEntropyLoss()
+ewc = EWC(net, train_loader, DEVICE, NUM_TASKS, criterion)
+
 permutator = Permutator(NUM_TASKS)
 
 
