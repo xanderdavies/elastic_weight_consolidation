@@ -1,1 +1,4 @@
 .vscode/settings.json
+data
+wandb
+__pycache__
