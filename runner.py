@@ -26,7 +26,7 @@ parser.add_argument("--device", type=str, default=None, help="Device to use")
 parser.add_argument("--lr", type=float, default=0.001, help="Learning rate")
 parser.add_argument("--lmda", type=float, default=1000, help="Lambda")
 parser.add_argument(
-    "--wandb-project", type=str, default="mnist", help="Wandb project name"
+    "--wandb-project", type=str, default="ewc", help="Wandb project name"
 )
 args = parser.parse_args()
 
